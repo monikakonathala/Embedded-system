@@ -1,0 +1,28 @@
+int sensor=8; //The output of PIR sensor connected to pin 7
+int buzzer=7; // buzzer connected at pin 8
+int led=9; // led connected to the pin 7
+
+int sensor_value; //variable to hold read sensor value
+void setup()
+{
+pinMode(sensor,INPUT); // configuring pin 8 as Input
+pinMode(led,OUTPUT); //configuring pin 9 as OUTPUT
+pinMode(buzzer,OUTPUT); // configuring pin 7 as OUTPUT
+Serial.begin(9600);
+}
+void loop()
+{
+sensor_value=digitalRead(sensor); // Reading sensor value from pin 7
+if(sensor_value==HIGH) // Checking if PIR sensor sends a HIGH signal to Arduino
+{
+digitalWrite(buzzer,HIGH);// Activating the buzzer
+digitalWrite(led,HIGH); // activating the led
+Serial.println("burglar in the house"); // to print the detected info in serial monitor
+tone(7,4000); //setting the frequency for buzzer
+delay(500); // maintaining delay for the time duration
+digitalWrite(buzzer,LOW);
+noTone(7); // turning off the buzzer
+
+digitalWrite(led,LOW);
+}
+}
